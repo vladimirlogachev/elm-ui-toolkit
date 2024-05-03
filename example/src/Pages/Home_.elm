@@ -12,6 +12,7 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Shared
 import TextStyle
+import Util.InlineStyle
 import View exposing (View)
 
 
@@ -58,6 +59,11 @@ color4 =
     ExtraColor.oklchPercent 91.28 0.208 102.04
 
 
+color5 : ExtraColor
+color5 =
+    ExtraColor.oklchPercent 32.17 0.151 330.75
+
+
 pageTitle : String
 pageTitle =
     "elm-ui color extra"
@@ -95,6 +101,12 @@ viewMobile layout =
 viewColor : LayoutState -> ExtraColor -> Element msg
 viewColor layout c =
     gridRow layout
-        [ gridBox layout { widthSteps = 2, heightSteps = 2 } [ ExtraColor.backgroundColor c ] []
-        , gridBox layout { widthSteps = 2, heightSteps = 2 } [ Background.color (ExtraColor.toRgba c) ] []
+        [ gridBox layout
+            { widthSteps = 2, heightSteps = 2 }
+            [ Util.InlineStyle.render (ExtraColor.backgroundColorStyle c ++ ExtraColor.fontColorStyle color5) ]
+            [ text "OKLCH" ]
+        , gridBox layout
+            { widthSteps = 2, heightSteps = 2 }
+            [ Background.color (ExtraColor.toRgba c), Font.color (ExtraColor.toRgba color5) ]
+            [ text "RGB" ]
         ]
