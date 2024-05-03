@@ -1,0 +1,29 @@
+{
+  "name": "elm-modular-grid",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "elm make",
+    "typecheck": "npm run build",
+    "format-fix-all": "elm-format --yes src/ review/",
+    "format-validate": "elm-format --validate src/ review/",
+    "review": "elm-review",
+    "review-fix-interactive": "elm-review --fix",
+    "review-fix-all": "yes | elm-review --fix-all",
+    "check": "npm run typecheck && npm run format-validate && npm run review",
+    "precommit-fix": "npm run typecheck && npm run format-fix-all && npm run review-fix-all"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "elm": "^0.19.1-6",
+    "elm-format": "^0.8.7",
+    "elm-review": "^2.11.1"
+  },
+  "dependencies": {},
+  "engines": {
+    "npm": ">=10.2.3 <11.0.0",
+    "node": ">=20.12.0 <21.0.0"
+  }
+}
