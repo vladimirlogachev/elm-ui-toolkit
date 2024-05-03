@@ -54,6 +54,7 @@ convertLchToLab { l, c, h, alpha } =
 convertOklabToLrgb : LabColor -> RgbaColor
 convertOklabToLrgb { l, a, b, alpha } =
     let
+        l_ : Float
         l_ =
             l
                 * 0.9999999984505198
@@ -63,6 +64,7 @@ convertOklabToLrgb { l, a, b, alpha } =
                 * b
                 |> (\x -> x ^ 3)
 
+        m : Float
         m =
             l
                 * 1.0000000088817609
@@ -72,6 +74,7 @@ convertOklabToLrgb { l, a, b, alpha } =
                 * b
                 |> (\x -> x ^ 3)
 
+        s : Float
         s =
             l
                 * 1.0000000546724108
@@ -91,17 +94,20 @@ convertOklabToLrgb { l, a, b, alpha } =
 fn : Float -> Float
 fn c =
     let
+        absC : Float
         absC =
             abs c
-
-        sign =
-            if c < 0 then
-                -1
-
-            else
-                1
     in
     if absC > 0.0031308 then
+        let
+            sign : Float
+            sign =
+                if c < 0 then
+                    -1
+
+                else
+                    1
+        in
         sign * (1.055 * (absC ^ (1 / 2.4)) - 0.055)
 
     else
