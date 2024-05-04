@@ -14,7 +14,7 @@ module ExtraColor exposing
 
 import Culori
 import Element exposing (..)
-import Util.InlineStyle as InlineStyle exposing (InlineStyle)
+import InlineStyle exposing (InlineStyle)
 
 
 

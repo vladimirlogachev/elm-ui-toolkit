@@ -12,7 +12,6 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Shared
 import TextStyle
-import Util.InlineStyle
 import View exposing (View)
 
 
@@ -48,6 +47,7 @@ color2 : ExtraColor
 color2 =
     ExtraColor.oklchPercent 72.75 0.181 229.1
 
+
 color3 : ExtraColor
 color3 =
     ExtraColor.oklchPercent 83.93 0.336 147.57
@@ -56,11 +56,6 @@ color3 =
 color4 : ExtraColor
 color4 =
     ExtraColor.oklchPercent 91.28123 0.208 102.04
-
-
-color5 : ExtraColor
-color5 =
-    ExtraColor.oklchPercent 32.17 0.151 330.75
 
 
 pageTitle : String
@@ -88,13 +83,12 @@ viewMobile layout =
         , spacing layout.grid.gutter
         ]
         ([ paragraph TextStyle.header [ text pageTitle ]
-        , paragraph [] [ text "Browsers will display a similar color anyway, even if it's not supported by the display. The fallbadck color is here only for the old browsers." ]
+         , paragraph [] [ text "Browsers will display a similar color anyway, even if it's not supported by the display. The fallbadck color is here only for the old browsers." ]
          , gridRow layout
             [ gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "OKLCH" ]
             , gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "RGB fallback" ]
             ]
          ]
-
             ++ List.map (viewColor layout) [ color1, color2, color3, color4 ]
         )
 
@@ -102,16 +96,16 @@ viewMobile layout =
 viewColor : LayoutState -> ExtraColor -> Element msg
 viewColor layout c =
     gridRow layout
-        [gridBox layout
+        [ gridBox layout
             { widthSteps = 6, heightSteps = 2 }
-            [  ]
-            [paragraph [Font.alignRight] [text <| ExtraColor.toCssString c ]]
-         ,    gridBox layout
+            []
+            [ paragraph [ Font.alignRight ] [ text <| ExtraColor.toCssString c ] ]
+        , gridBox layout
             { widthSteps = 2, heightSteps = 2 }
-            [ ExtraColor.backgroundColor c  ]
-            [  ]
+            [ ExtraColor.backgroundColor c ]
+            []
         , gridBox layout
             { widthSteps = 2, heightSteps = 2 }
             [ Background.color (ExtraColor.toRgba c) ]
-            [ ]
+            []
         ]

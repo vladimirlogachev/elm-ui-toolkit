@@ -1,4 +1,4 @@
-module Util.InlineStyle exposing (InlineStyle, render)
+module InlineStyle exposing (InlineStyle, render)
 
 import Element exposing (..)
 import Html.Attributes

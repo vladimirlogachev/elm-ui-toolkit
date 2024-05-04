@@ -37,6 +37,11 @@ import Review.Rule as Rule exposing (Rule)
 import Simplify
 
 
+packageExposedModules : List String
+packageExposedModules =
+    [ "src/ExtraColor.elm", "src/Typography.elm", "src/InlineStyle.elm" ]
+
+
 config : List Rule
 config =
     [ NoDebug.Log.rule
@@ -48,11 +53,11 @@ config =
     , NoMissingSubscriptionsCall.rule
     , NoRecursiveUpdate.rule
     , NoUselessSubscriptions.rule
-    , NoUnsafeDivision.rule |> Rule.ignoreErrorsForFiles [ "src/ExtraColor.elm" ]
-    , NoUnused.CustomTypeConstructors.rule [] |> Rule.ignoreErrorsForFiles [ "src/ExtraColor.elm" ]
-    , NoUnused.CustomTypeConstructorArgs.rule |> Rule.ignoreErrorsForFiles [ "src/ExtraColor.elm" ]
+    , NoUnsafeDivision.rule |> Rule.ignoreErrorsForFiles packageExposedModules
+    , NoUnused.CustomTypeConstructors.rule [] |> Rule.ignoreErrorsForFiles packageExposedModules
+    , NoUnused.CustomTypeConstructorArgs.rule |> Rule.ignoreErrorsForFiles packageExposedModules
     , NoUnused.Dependencies.rule
-    , NoUnused.Exports.rule |> Rule.ignoreErrorsForFiles [ "src/ExtraColor.elm" ]
+    , NoUnused.Exports.rule |> Rule.ignoreErrorsForFiles packageExposedModules
     , NoUnused.Modules.rule
     , NoUnused.Parameters.rule
     , NoUnused.Patterns.rule
