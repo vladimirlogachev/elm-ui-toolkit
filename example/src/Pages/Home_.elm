@@ -44,10 +44,9 @@ color1 =
     ExtraColor.oklchPercent 68.64 0.255 36.4
 
 
-{-| This color should look the same in RGB -}
 color2 : ExtraColor
 color2 =
-    ExtraColor.oklchPercent 70.4 0.109 229.1
+    ExtraColor.oklchPercent 72.75 0.181 229.1
 
 color3 : ExtraColor
 color3 =
@@ -56,7 +55,7 @@ color3 =
 
 color4 : ExtraColor
 color4 =
-    ExtraColor.oklchPercent 91.28 0.208 102.04
+    ExtraColor.oklchPercent 91.28123 0.208 102.04
 
 
 color5 : ExtraColor
@@ -66,7 +65,7 @@ color5 =
 
 pageTitle : String
 pageTitle =
-    "elm-ui color extra"
+    "elm-ui toolkit"
 
 
 
@@ -89,6 +88,7 @@ viewMobile layout =
         , spacing layout.grid.gutter
         ]
         ([ paragraph TextStyle.header [ text pageTitle ]
+        , paragraph [] [ text "Browsers will display a similar color anyway, even if it's not supported by the display. The fallbadck color is here only for the old browsers." ]
          , gridRow layout
             [ gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "OKLCH" ]
             , gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "RGB fallback" ]
@@ -102,12 +102,16 @@ viewMobile layout =
 viewColor : LayoutState -> ExtraColor -> Element msg
 viewColor layout c =
     gridRow layout
-        [ gridBox layout
+        [gridBox layout
+            { widthSteps = 6, heightSteps = 2 }
+            [  ]
+            [paragraph [Font.alignRight] [text <| ExtraColor.toCssString c ]]
+         ,    gridBox layout
             { widthSteps = 2, heightSteps = 2 }
-            [ Util.InlineStyle.render (ExtraColor.backgroundColorStyle c ++ ExtraColor.fontColorStyle color5) ]
-            [ text "OKLCH" ]
+            [ ExtraColor.backgroundColor c  ]
+            [  ]
         , gridBox layout
             { widthSteps = 2, heightSteps = 2 }
-            [ Background.color (ExtraColor.toRgba c), Font.color (ExtraColor.toRgba color5) ]
-            [ text "RGB" ]
+            [ Background.color (ExtraColor.toRgba c) ]
+            [ ]
         ]

@@ -12,7 +12,10 @@ Heavily borrows from [culori](https://culorijs.org/).
 
   - Typography
   - InlineStyle
-  - ExtraColor (wide gammut color?)
+  - ExtraColor
+    - add cool palettes
+    - deal with negative css values, display the output
+    - maybe add Element.Color to the ADT?
   - Culori (not exposed)
   - Find more reusable code in the old apps
 

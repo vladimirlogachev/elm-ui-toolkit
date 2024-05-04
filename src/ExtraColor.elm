@@ -1,8 +1,27 @@
-module ExtraColor exposing (ExtraColor, backgroundColor, backgroundColorStyle, fontColor, fontColorStyle, oklch, oklchPercent, oklcha, oklchaPercent, toRgba)
+module ExtraColor exposing
+    ( ExtraColor
+    , backgroundColor
+    , backgroundColorStyle
+    , fontColor
+    , fontColorStyle
+    , oklch
+    , oklchPercent
+    , oklcha
+    , oklchaPercent
+    , toCssString
+    , toRgba
+    )
 
 import Culori
 import Element exposing (..)
 import Util.InlineStyle as InlineStyle exposing (InlineStyle)
+
+
+
+-- More info:
+-- https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
+-- https://oklch.com
+-- https://oklch-palette.vercel.app
 
 
 type alias Oklch =
@@ -25,21 +44,22 @@ oklch l c h =
     ColorOklch <| { l = l, c = c, h = h, alpha = 1 }
 
 
-oklchPercent : Float -> Float -> Float -> ExtraColor
-oklchPercent l c h =
-    ColorOklch <| { l = fromPercent l, c = c, h = h, alpha = 1 }
-
-
-fromPercent : Float -> Float
-fromPercent p =
-    p / 100.0
-
-
 oklcha : Float -> Float -> Float -> Float -> ExtraColor
 oklcha l c h a =
     ColorOklch <| { l = l, c = c, h = h, alpha = a }
 
 
+{-| Allows at most 2 decimal places for percent values, e.g. 12.34
+Other decimal places are truncated. If you need more precision, use `oklch` or `oklchPercent`.
+-}
+oklchPercent : Float -> Float -> Float -> ExtraColor
+oklchPercent l c h =
+    ColorOklch <| { l = fromPercent l, c = c, h = h, alpha = 1 }
+
+
+{-| Allows at most 2 decimal places for percent values, e.g. 12.34
+Other decimal places are truncated. If you need more precision, use `oklch` or `oklcha`.
+-}
 oklchaPercent : Float -> Float -> Float -> Float -> ExtraColor
 oklchaPercent l c h a =
     ColorOklch <| { l = fromPercent l, c = c, h = h, alpha = a }
@@ -86,10 +106,6 @@ backgroundColorStyle ce =
     ]
 
 
-
---- Implementation details
-
-
 toCssString : ExtraColor -> String
 toCssString ce =
     case ce of
@@ -113,6 +129,14 @@ toCssString ce =
                     ++ " / "
                     ++ String.fromFloat alpha
                     ++ ")"
+
+
+{-| Allows at most 2 decimal places for percent values, e.g. 12.34
+Other decimal places are truncated.
+-}
+fromPercent : Float -> Float
+fromPercent p =
+    (toFloat <| floor (p * 100)) / (100 * 100)
 
 
 rgbaToCssString : Color -> String
