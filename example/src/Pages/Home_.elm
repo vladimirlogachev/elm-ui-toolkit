@@ -85,7 +85,8 @@ viewMobile layout =
         ([ paragraph TextStyle.header [ text pageTitle ]
          , paragraph [] [ text "Browsers will display a similar color anyway, even if it's not supported by the display. The fallbadck color is here only for the old browsers." ]
          , gridRow layout
-            [ gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "OKLCH" ]
+            [ gridColumn layout { widthSteps = 6 } [] []
+            , gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "OKLCH" ]
             , gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "RGB fallback" ]
             ]
          ]
