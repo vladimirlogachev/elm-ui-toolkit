@@ -16,6 +16,7 @@ Heavily borrows from [culori](https://culorijs.org/).
     - add cool palettes
     - deal with negative css values, display the output
     - maybe add Element.Color to the ADT?
+    - definite write a lot of test cases, and render the string output
   - Culori (not exposed)
   - Find more reusable code in the old apps
 
