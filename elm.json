@@ -1,6 +1,6 @@
 {
     "type": "package",
-    "name": "vladimirlogachev/elm-ui-color-extra",
+    "name": "vladimirlogachev/elm-ui-toolkit",
     "summary": "Wide-gaumt colors for elm-ui (OKLCH, DCI-P3, Rec. 2020)",
     "license": "MIT",
     "version": "1.0.0",

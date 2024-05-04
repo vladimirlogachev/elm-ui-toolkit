@@ -1,12 +1,12 @@
 {
-  "name": "elm-ui-color-extra-example",
+  "name": "elm-ui-toolkit-example",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "elm-land generate && vite",
-    "build": "elm-land generate && vite build --base=/elm-ui-color-extra",
+    "build": "elm-land generate && vite build --base=/elm-ui-toolkit",
     "typecheck": "npm run build",
     "format-fix-all": "elm-format --yes src/ review/",
     "format-validate": "elm-format --validate src/ review/",

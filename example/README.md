@@ -1,4 +1,4 @@
-# elm-ui-color-extra example
+# elm-ui-toolkit example
 
 ## Pre-requisites
 

@@ -1,4 +1,4 @@
-# elm-ui-color-extra
+# elm-ui-toolkit
 
 Wide-gaumt colors for elm-ui (OKLCH, DCI-P3, Rec. 2020)
 

@@ -75,7 +75,7 @@ pageTitle =
 
 view : Shared.Model -> View msg
 view { layout } =
-    { title = "elm-ui-color-extra"
+    { title = "elm-ui-toolkit"
     , attributes = [ Background.color Color.black, Font.color Color.white ]
     , element =
         viewMobile layout
