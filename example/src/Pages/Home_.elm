@@ -44,10 +44,10 @@ color1 =
     ExtraColor.oklchPercent 68.64 0.255 36.4
 
 
+{-| This color should look the same in RGB -}
 color2 : ExtraColor
 color2 =
-    ExtraColor.oklchPercent 71.87 0.181 229.1
-
+    ExtraColor.oklchPercent 70.4 0.109 229.1
 
 color3 : ExtraColor
 color3 =
@@ -94,6 +94,7 @@ viewMobile layout =
             , gridColumn layout { widthSteps = 2 } [ Font.color Color.white ] [ text "RGB fallback" ]
             ]
          ]
+
             ++ List.map (viewColor layout) [ color1, color2, color3, color4 ]
         )
 

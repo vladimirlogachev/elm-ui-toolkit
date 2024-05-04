@@ -125,4 +125,4 @@ convertLrgbToRgb { r, g, b, alpha } =
 
 toElmUiColor : RgbaColor -> Color
 toElmUiColor { r, g, b, alpha } =
-    Element.rgba (fn r) (fn g) (fn b) alpha
+    Element.rgba r g b alpha
