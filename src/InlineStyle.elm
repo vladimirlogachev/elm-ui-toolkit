@@ -6,9 +6,9 @@ Here's some context:
 
 1.  Elm can render several `Html.Attributes.style` as an inline style, and they will be "merged" in such a way that there will be no repeating properties.
 2.  If we pass several `Html.Attributes.attribute` of type "style", they won't be merged. Only one will be used.
-3.  If we pass `Html.Attributes.attribute` of type "style", it replace any of the previous styles (both `attribute` and `style`).
+3.  If we pass `Html.Attributes.attribute` of type "style", it replaces any of the previous styles (both `attribute` and `style`).
 4.  Modern CSS properties require us to set fallback values for outdated browsers.
-5.  Fallback style property values require us to set the same property several times. Which is not supported neither by `Html.Attributes.attribute` nor by `Html.Attributes.style`.
+5.  Fallback style property values require us to set the same property several times. Which is not supported by both `Html.Attributes.attribute` and `Html.Attributes.style`.
 
 The solution is the `InlineStyle` type and the `render function`.
 
@@ -32,7 +32,7 @@ type alias InlineStyle =
     List ( String, String )
 
 
-{-| The `render` of inline styles must be done only once per element, because otherwise some styles will break.
+{-| The `render` of inline styles must be done only once per element because otherwise, some styles will break.
 
 The only working approach to customize a single element with several functions is to:
 

@@ -1,19 +1,19 @@
 module Typography exposing (nbsp, prepareString, preparedText)
 
-{-| This module helps you to prepare text for display in a web page.
-The implementation and features are far from being perfect, but better than nothing.
+{-| This module helps you to prepare text for display on a web page.
+The implementation and features are far from perfect, but better than nothing.
 
 If you are looking for a more advanced solution, consider using (or porting) <https://github.com/typograf/typograf>
 
-"Prepare" in this module means to prevent typograpic mistakes:
+"Prepare" in this module means to prevent typographic mistakes:
 
   - Add non-breaking spaces after specific words, so that
-  - `a cat` will always be wrapped together and not leaving `a` on one line and `cat` on the other.
+  - `a cat` will always be wrapped together and not leave `a` on one line and `cat` on the other.
   - `a + b` will be wrapped as `a` and `+ b`
 
-Note: Ideally all text lines which are subjects to typographic conversion
+Note: Ideally all text lines which are subject to typographic conversion
 should be stored in some database (and served from the backend) in **both clean and processed forms**.
-This would allow to edit the text in a clean form and display it in a processed form.
+This would allow us to edit the text in a clean form and display it in a processed form.
 
 @docs nbsp, prepareString, preparedText
 
@@ -25,7 +25,7 @@ import Set exposing (Set)
 
 {-| Non-breaking space character.
 
-You will need it only occasionally, when constructing the text manually.
+You will need it only occasionally when constructing the text manually.
 
 -}
 nbsp : String
