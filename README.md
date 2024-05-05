@@ -1,35 +1,9 @@
 # elm-ui-toolkit
 
-Wide-gaumt colors for elm-ui (OKLCH, DCI-P3, Rec. 2020)
+This package is a collection of workarounds and helpers designed for use with the `elm-ui` library.
 
-Heavily borrows from [culori](https://culorijs.org/).
+- `ExtraColor` allows to use the wide-gamut colors (OKLCH, DCI-P3, Rec. 2020).
+- `Typography` helps to prepare text for display on a web page.
+- `InlineStyle` helps to style elements in ways not directly supported by `elm/html` or `elm-ui`.
 
-## Release Plan:
-
-- Modules:
-
-  - Typography
-    - review code
-    - write docstrings
-    - check typos with grammarly
-    - demonstrate in the example app
-    - any tests
-  - InlineStyle
-    - review code
-    - write docstrings
-    - check typos with grammarly
-    - demonstrate in the example app
-    - any tests
-  - ExtraColor
-    - review code
-    - write docstrings
-    - check typos with grammarly
-    - demonstrate in the example app
-    - add cool palettes
-    - deal with negative css values, display the output
-    - maybe add Element.Color to the ADT?
-    - definite write a lot of test cases, and render the string output
-  - Culori (not exposed)
-    - review code
-    - consider splitting to modules as in the original
-  - Find more reusable code in the old apps
+- Example: [live](https://vladimirlogachev.github.io/elm-ui-toolkit), [code](https://github.com/vladimirlogachev/elm-ui-toolkit/tree/main/example)

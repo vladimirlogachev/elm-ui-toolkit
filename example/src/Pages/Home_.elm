@@ -142,17 +142,30 @@ viewMobile layout =
         ]
         [ paragraph TextStyle.header [ text pageTitle ]
         , paragraph TextStyle.subheader [ text "ExtraColor" ]
-        , paragraph [ Font.color Color.grey ] [ preparedText "Browsers will display a similar color anyway, even if it's not supported by the display." ]
-        , paragraph [ Font.color Color.grey ] [ preparedText "Think of the calculated fallback color as the one that will be used by the outdated browsers." ]
-        , gridRow layout
-            [ gridColumn layout { widthSteps = 4 } [ Font.color Color.white ] [ text "Elm code" ]
-            , gridColumn layout { widthSteps = 1 } [ Font.color Color.white ] [ text "Color" ]
-            , gridColumn layout { widthSteps = 1 } [ Font.color Color.white ] [ text "Fallback" ]
-            , gridColumn layout { widthSteps = 6 } [ Font.color Color.white ] [ text "Actual inline style" ]
+        , column [ width fill, spacing 12, Font.color Color.grey ]
+            [ paragraph [] [ preparedText "Wide-gamut colors (OKLCH, DCI-P3, Rec. 2020) for elm-ui" ]
+            , paragraph [] [ preparedText "Browsers will display a similar color anyway, even if it's not supported by the display." ]
+            , paragraph [] [ preparedText "Think of the calculated fallback color as the one that will be used by the outdated browsers." ]
+            , paragraph [] [ text "This package heavily borrows from the ", newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://culorijs.org/", label = preparedText "culori" }, text " library." ]
             ]
-        , column [ spacing layout.grid.gutter ] <| List.map (viewColor layout) [ color1, color2, color3, color4 ]
+        , paragraph TextStyle.subheader2 [ text "More info" ]
+        , column [ width fill, spacing 12, Font.color Color.grey ]
+            [ paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl", label = preparedText "OKLCH in CSS: why we moved from RGB and HSL (by Evil Martians)" } ]
+            , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch.com", label = preparedText "OKLCH Color Picker & Converter (by Evil Martians)" } ]
+            , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch-palette.vercel.app", label = preparedText "OKlch palette generator (by Pleisto)" } ]
+            ]
+        , paragraph TextStyle.subheader2 [ text "Examples" ]
+        , column [ width fill, spacing layout.grid.gutter ] <|
+            (gridRow layout
+                [ gridColumn layout { widthSteps = 4 } [ Font.color Color.grey ] [ text "Elm code" ]
+                , gridColumn layout { widthSteps = 1 } [ Font.color Color.grey ] [ text "Color" ]
+                , gridColumn layout { widthSteps = 1 } [ Font.color Color.grey ] [ text "Fallback" ]
+                , gridColumn layout { widthSteps = 6 } [ Font.color Color.grey ] [ text "Actual inline style" ]
+                ]
+                :: List.map (viewColor layout) [ color1, color2, color3, color4 ]
+            )
         , paragraph TextStyle.subheader [ text "Typography" ]
-        , paragraph [] [ text "Notice how the lines are wraped" ]
+        , paragraph [] [ text "Notice how the lines are wrapped:" ]
         , paragraph [ Font.color Color.grey ] [ preparedText sampleText ]
         ]
 
@@ -175,13 +188,18 @@ viewColor layout sample =
             []
         , gridBox layout
             { widthSteps = 1, heightSteps = 1 }
-            [ Background.color (ExtraColor.toRgba color) ]
+            [ Background.color <| toElmUiColor <| ExtraColor.toRgbaFallback color ]
             []
         , gridColumn layout
             { widthSteps = 6 }
             [ Font.color Color.grey ]
             [ renderInlineStyleForPreview (ExtraColor.backgroundColorStyle color) ]
         ]
+
+
+toElmUiColor : { r : Float, g : Float, b : Float, alpha : Float } -> Color
+toElmUiColor { r, g, b, alpha } =
+    Element.rgba r g b alpha
 
 
 renderInlineStyleForPreview : InlineStyle -> Element msg

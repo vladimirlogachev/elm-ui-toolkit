@@ -1,4 +1,4 @@
-module TextStyle exposing (body, code, header, subheader)
+module TextStyle exposing (body, code, header, subheader, subheader2)
 
 import Element exposing (..)
 import Element.Font as Font
@@ -12,6 +12,11 @@ header =
 subheader : List (Attribute msg)
 subheader =
     [ Font.size 40, Font.medium, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
+
+
+subheader2 : List (Attribute msg)
+subheader2 =
+    [ Font.size 28, Font.medium, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
 
 
 body : List (Attribute msg)

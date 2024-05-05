@@ -1,7 +1,7 @@
 module Typography exposing (nbsp, prepareString, preparedText)
 
 {-| This module helps you to prepare text for display in a web page.
-It is far from being perfect, but better than nothing.
+The implementation and features are far from being perfect, but better than nothing.
 
 If you are looking for a more advanced solution, consider using (or porting) <https://github.com/typograf/typograf>
 

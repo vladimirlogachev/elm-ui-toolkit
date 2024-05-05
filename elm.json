@@ -1,19 +1,15 @@
 {
-    "type": "package",
-    "name": "vladimirlogachev/elm-ui-toolkit",
-    "summary": "Wide-gaumt colors for elm-ui (OKLCH, DCI-P3, Rec. 2020)",
-    "license": "MIT",
-    "version": "1.0.0",
-    "exposed-modules": [
-        "ExtraColor",
-        "Typography",
-        "InlineStyle"
-    ],
-    "elm-version": "0.19.1 <= v < 0.20.0",
-    "dependencies": {
-        "elm/core": "1.0.5 <= v < 2.0.0",
-        "elm/html": "1.0.0 <= v < 2.0.0",
-        "mdgriffith/elm-ui": "1.1.8 <= v < 2.0.0"
-    },
-    "test-dependencies": {}
+  "type": "package",
+  "name": "vladimirlogachev/elm-ui-toolkit",
+  "summary": "Wide-gamut colors (OKLCH, DCI-P3, Rec. 2020), typography, inline styles.",
+  "license": "MIT",
+  "version": "1.0.0",
+  "exposed-modules": ["ExtraColor", "Typography", "InlineStyle"],
+  "elm-version": "0.19.1 <= v < 0.20.0",
+  "dependencies": {
+    "elm/core": "1.0.5 <= v < 2.0.0",
+    "elm/html": "1.0.0 <= v < 2.0.0",
+    "mdgriffith/elm-ui": "1.1.8 <= v < 2.0.0"
+  },
+  "test-dependencies": {}
 }

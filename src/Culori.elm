@@ -114,8 +114,8 @@ fn c =
 
 convertLrgbToRgb : RgbaColor -> RgbaColor
 convertLrgbToRgb { r, g, b, alpha } =
-    { r = max 0 <| fn r
-    , g = max 0 <| fn g
-    , b = max 0 <| fn b
-    , alpha = max 0 <| alpha
+    { r = clamp 0 1 <| fn r
+    , g = clamp 0 1 <| fn g
+    , b = clamp 0 1 <| fn b
+    , alpha = clamp 0 1 alpha
     }

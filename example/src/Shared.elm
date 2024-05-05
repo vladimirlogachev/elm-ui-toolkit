@@ -61,7 +61,7 @@ layoutConfig =
         { minGridWidth = 720
         , maxGridWidth = Just 1280
         , columnCount = 12
-        , gutter = 16
+        , gutter = 32
         , margin = GridLayout1.SameAsGutter
         }
     }
