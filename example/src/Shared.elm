@@ -58,8 +58,8 @@ init flagsResult _ =
 layoutConfig : GridLayout1.LayoutConfig
 layoutConfig =
     { mobileScreen =
-        { minGridWidth = 360
-        , maxGridWidth = Just 720
+        { minGridWidth = 720
+        , maxGridWidth = Just 1280
         , columnCount = 12
         , gutter = 16
         , margin = GridLayout1.SameAsGutter

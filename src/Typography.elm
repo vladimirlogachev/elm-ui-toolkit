@@ -1,48 +1,75 @@
-module Typography exposing (nbsp, preparedText)
+module Typography exposing (nbsp, prepareString, preparedText)
+
+{-| This module helps you to prepare text for display in a web page.
+It is far from being perfect, but better than nothing.
+
+If you are looking for a more advanced solution, consider using (or porting) <https://github.com/typograf/typograf>
+
+"Prepare" in this module means to prevent typograpic mistakes:
+
+  - Add non-breaking spaces after specific words, so that
+  - `a cat` will always be wrapped together and not leaving `a` on one line and `cat` on the other.
+  - `a + b` will be wrapped as `a` and `+ b`
+
+Note: Ideally all text lines which are subjects to typographic conversion
+should be stored in some database (and served from the backend) in **both clean and processed forms**.
+This would allow to edit the text in a clean form and display it in a processed form.
+
+@docs nbsp, prepareString, preparedText
+
+-}
 
 import Element exposing (..)
 import Set exposing (Set)
 
 
-{-| A helper to avoid typographic mistakes.
+{-| Non-breaking space character.
 
-1.  Split string into lines
-2.  Glue last 2 words in a line together (if line consists of 3 and more)
-3.  Replace spaces after specific words with nbsp
-4.  Glue lines back together
-
-Note: Ideally it should be stored in both clean and processed forms in database.
-Note: We may even come up with a separate elm package, carefully ported from js.
+You will need it only occasionally, when constructing the text manually.
 
 -}
-preparedText : String -> Element msg
-preparedText x =
-    String.lines x
-        |> List.map processLine
-        |> String.join "\n"
-        |> text
-
-
-processLine : String -> String
-processLine =
-    String.words
-        >> List.foldr
-            (\word tail ->
-                if Set.member (String.toLower word) dictionary then
-                    word ++ nbsp ++ tail
-
-                else if tail == "" then
-                    word
-
-                else
-                    word ++ " " ++ tail
-            )
-            ""
-
-
 nbsp : String
 nbsp =
     "\u{00A0}"
+
+
+{-|
+
+1.  Splits a string into lines on newline characters
+2.  Applies transformations to each line separately:
+      - Replaces spaces after specific words with nbsp
+3.  Glues the lines back together
+
+-}
+prepareString : String -> String
+prepareString x =
+    String.lines x
+        |> List.map processIndividualLine
+        |> String.join "\n"
+
+
+{-| Wraps `Element.text` from `elm-ui`, applying `prepareString` before it.
+-}
+preparedText : String -> Element msg
+preparedText =
+    prepareString >> text
+
+
+processIndividualLine : String -> String
+processIndividualLine =
+    String.words
+        >> List.foldr
+            (\word resultString ->
+                if Set.member (String.toLower word) dictionary then
+                    word ++ nbsp ++ resultString
+
+                else if resultString == "" then
+                    word
+
+                else
+                    word ++ " " ++ resultString
+            )
+            ""
 
 
 dictionary : Set String

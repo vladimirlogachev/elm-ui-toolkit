@@ -1,6 +1,4 @@
-module Culori exposing (convertOklchToRgba)
-
-import Element exposing (Color)
+module Culori exposing (OklchColor, RgbaColor, convertOklchToRgba)
 
 
 type alias OklchColor =
@@ -27,9 +25,9 @@ type alias RgbaColor =
     }
 
 
-convertOklchToRgba : OklchColor -> Color
+convertOklchToRgba : OklchColor -> RgbaColor
 convertOklchToRgba c =
-    toElmUiColor <| convertLrgbToRgb <| convertOklabToLrgb <| convertLchToLab c
+    convertLrgbToRgb <| convertOklabToLrgb <| convertLchToLab c
 
 
 convertLchToLab : OklchColor -> LabColor
@@ -116,13 +114,8 @@ fn c =
 
 convertLrgbToRgb : RgbaColor -> RgbaColor
 convertLrgbToRgb { r, g, b, alpha } =
-    { r = fn r
-    , g = fn g
-    , b = fn b
-    , alpha = alpha
+    { r = max 0 <| fn r
+    , g = max 0 <| fn g
+    , b = max 0 <| fn b
+    , alpha = max 0 <| alpha
     }
-
-
-toElmUiColor : RgbaColor -> Color
-toElmUiColor { r, g, b, alpha } =
-    Element.rgba r g b alpha

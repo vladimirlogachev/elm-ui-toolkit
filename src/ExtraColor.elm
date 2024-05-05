@@ -2,13 +2,14 @@ module ExtraColor exposing
     ( ExtraColor
     , backgroundColor
     , backgroundColorStyle
+    , borderColor
+    , borderColorStyle
     , fontColor
     , fontColorStyle
     , oklch
     , oklchPercent
     , oklcha
     , oklchaPercent
-    , toCssString
     , toRgba
     )
 
@@ -69,7 +70,7 @@ toRgba : ExtraColor -> Color
 toRgba ce =
     case ce of
         ColorOklch x ->
-            Culori.convertOklchToRgba x
+            convertOklchToRgba x
 
 
 
@@ -77,11 +78,8 @@ toRgba ce =
 
 
 fontColor : ExtraColor -> Attribute msg
-fontColor ce =
-    InlineStyle.render
-        [ ( "color", rgbaToCssString (toRgba ce) )
-        , ( "color", toCssString ce )
-        ]
+fontColor =
+    fontColorStyle >> InlineStyle.render
 
 
 fontColorStyle : ExtraColor -> InlineStyle
@@ -92,17 +90,26 @@ fontColorStyle ce =
 
 
 backgroundColor : ExtraColor -> Attribute msg
-backgroundColor ce =
-    InlineStyle.render
-        [ ( "background-color", rgbaToCssString (toRgba ce) )
-        , ( "background-color", toCssString ce )
-        ]
+backgroundColor =
+    backgroundColorStyle >> InlineStyle.render
 
 
 backgroundColorStyle : ExtraColor -> InlineStyle
 backgroundColorStyle ce =
     [ ( "background-color", rgbaToCssString (toRgba ce) )
     , ( "background-color", toCssString ce )
+    ]
+
+
+borderColor : ExtraColor -> Attribute msg
+borderColor =
+    borderColorStyle >> InlineStyle.render
+
+
+borderColorStyle : ExtraColor -> InlineStyle
+borderColorStyle ce =
+    [ ( "border-color", rgbaToCssString (toRgba ce) )
+    , ( "border-color", toCssString ce )
     ]
 
 
@@ -155,3 +162,13 @@ rgbaToCssString x =
         ++ ","
         ++ String.fromFloat alpha
         ++ ")"
+
+
+convertOklchToRgba : Culori.OklchColor -> Color
+convertOklchToRgba =
+    Culori.convertOklchToRgba >> toElmUiColor
+
+
+toElmUiColor : Culori.RgbaColor -> Color
+toElmUiColor { r, g, b, alpha } =
+    Element.rgba r g b alpha
