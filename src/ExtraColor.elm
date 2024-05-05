@@ -113,11 +113,16 @@ oklchaPercent l c h a =
 -- Styling
 
 
+{-| Returns `Element.Attribute`.
+Use this function only if it's the only use of ExtraColor or InlineStyle for a given element.
+-}
 fontColor : ExtraColor -> Attribute msg
 fontColor =
     fontColorStyle >> InlineStyle.render
 
 
+{-| Returns `InlineStyle`.
+-}
 fontColorStyle : ExtraColor -> InlineStyle
 fontColorStyle ce =
     [ ( "color", rgbaToCssString (toRgbaFallback ce) )
@@ -125,11 +130,16 @@ fontColorStyle ce =
     ]
 
 
+{-| Returns `Element.Attribute`.
+Use this function only if it's the only use of ExtraColor or InlineStyle for a given element.
+-}
 backgroundColor : ExtraColor -> Attribute msg
 backgroundColor =
     backgroundColorStyle >> InlineStyle.render
 
 
+{-| Returns `InlineStyle`.
+-}
 backgroundColorStyle : ExtraColor -> InlineStyle
 backgroundColorStyle ce =
     [ ( "background-color", rgbaToCssString (toRgbaFallback ce) )
@@ -137,11 +147,16 @@ backgroundColorStyle ce =
     ]
 
 
+{-| Returns `Element.Attribute`.
+Use this function only if it's the only use of ExtraColor or InlineStyle for a given element.
+-}
 borderColor : ExtraColor -> Attribute msg
 borderColor =
     borderColorStyle >> InlineStyle.render
 
 
+{-| Returns `InlineStyle`.
+-}
 borderColorStyle : ExtraColor -> InlineStyle
 borderColorStyle ce =
     [ ( "border-color", rgbaToCssString (toRgbaFallback ce) )
