@@ -1,4 +1,7 @@
-module Typography exposing (nbsp, prepareString, preparedText)
+module Typography exposing
+    ( nbsp, prepareString, preparedText
+    , TextStyle, textStyleFromFigma, paragraphAttrs
+    )
 
 {-| This module helps you to prepare text for display on a web page.
 The implementation and features are far from perfect, but better than nothing.
@@ -17,9 +20,17 @@ This would allow us to edit the text in a clean form and display it in a process
 
 @docs nbsp, prepareString, preparedText
 
+
+# TextStyle
+
+This module also provides a helper for creating text styles from Figma properties.
+
+@docs TextStyle, textStyleFromFigma, paragraphAttrs
+
 -}
 
 import Element exposing (..)
+import Element.Font as Font
 import Set exposing (Set)
 
 
@@ -150,3 +161,50 @@ dictionary =
     , "with"
     ]
         |> Set.fromList
+
+
+{-| This helper type and functions allow you to quickly configure TextStyles from Figma properties.
+
+In elm-ui you can't specify the `line-height`, instead, you specify the paragraph spacing.
+However, including the `spacing` attribute to common text styles could lead to unexpected results
+when the text style is used not on a paragraph, but on a column or row.
+
+So, a good practice would be to calculate the `paragraphSpacing` from Figma values,
+but use it carefully and only in paragraphs.
+
+-}
+type alias TextStyle msg =
+    { attrs : List (Attribute msg)
+    , paragraphSpacing : Attribute msg
+    }
+
+
+{-| Creates `TextStyle`.
+-}
+textStyleFromFigma :
+    { fontFamily : List Font.Font
+    , fontWeight : Attribute msg
+    , fontSizePx : Int
+    , lineHeightPx : Int
+    , letterSpacingPercent : Float
+    }
+    -> TextStyle msg
+textStyleFromFigma props =
+    { attrs =
+        [ Font.family props.fontFamily
+        , props.fontWeight
+        , Font.size props.fontSizePx
+        , Font.letterSpacing (toFloat props.fontSizePx * (props.letterSpacingPercent / 100))
+        ]
+    , paragraphSpacing = spacing <| props.lineHeightPx - props.fontSizePx
+    }
+
+
+{-| Combines `attrs` and `paragraphSpacing` into a list of attributes.
+
+This helper should only be used in paragraphs.
+
+-}
+paragraphAttrs : TextStyle msg -> List (Attribute msg)
+paragraphAttrs style =
+    style.paragraphSpacing :: style.attrs

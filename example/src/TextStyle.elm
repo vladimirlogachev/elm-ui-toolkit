@@ -1,29 +1,59 @@
 module TextStyle exposing (body, code, header, subheader, subheader2)
 
-import Element exposing (..)
 import Element.Font as Font
+import Typography exposing (TextStyle)
 
 
-header : List (Attribute msg)
+header : TextStyle msg
 header =
-    [ Font.size 55, Font.semiBold, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
+    Typography.textStyleFromFigma
+        { fontFamily = [ Font.typeface "Inter", Font.sansSerif ]
+        , fontWeight = Font.semiBold
+        , fontSizePx = 55
+        , lineHeightPx = 55
+        , letterSpacingPercent = 0
+        }
 
 
-subheader : List (Attribute msg)
+subheader : TextStyle msg
 subheader =
-    [ Font.size 40, Font.medium, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
+    Typography.textStyleFromFigma
+        { fontFamily = [ Font.typeface "Inter", Font.sansSerif ]
+        , fontWeight = Font.medium
+        , fontSizePx = 40
+        , lineHeightPx = 40
+        , letterSpacingPercent = 0
+        }
 
 
-subheader2 : List (Attribute msg)
+subheader2 : TextStyle msg
 subheader2 =
-    [ Font.size 28, Font.medium, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
+    Typography.textStyleFromFigma
+        { fontFamily = [ Font.typeface "Inter", Font.sansSerif ]
+        , fontWeight = Font.medium
+        , fontSizePx = 28
+        , lineHeightPx = 28
+        , letterSpacingPercent = 0
+        }
 
 
-body : List (Attribute msg)
+body : TextStyle msg
 body =
-    [ Font.size 20, Font.regular, Font.family [ Font.typeface "Inter", Font.sansSerif ] ]
+    Typography.textStyleFromFigma
+        { fontFamily = [ Font.typeface "Inter", Font.sansSerif ]
+        , fontWeight = Font.regular
+        , fontSizePx = 20
+        , lineHeightPx = 20
+        , letterSpacingPercent = 0
+        }
 
 
-code : List (Attribute msg)
+code : TextStyle msg
 code =
-    [ Font.size 16, Font.regular, Font.family [ Font.typeface "JetBrains Mono", Font.monospace ] ]
+    Typography.textStyleFromFigma
+        { fontFamily = [ Font.typeface "JetBrains Mono", Font.monospace ]
+        , fontWeight = Font.regular
+        , fontSizePx = 16
+        , lineHeightPx = 16
+        , letterSpacingPercent = 0
+        }

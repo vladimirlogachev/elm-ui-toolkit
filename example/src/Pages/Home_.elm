@@ -140,21 +140,21 @@ viewMobile layout =
         [ width fill
         , spacing layout.grid.gutter
         ]
-        [ paragraph TextStyle.header [ text pageTitle ]
-        , paragraph TextStyle.subheader [ text "ExtraColor" ]
+        [ paragraph TextStyle.header.attrs [ text pageTitle ]
+        , paragraph TextStyle.subheader.attrs [ text "ExtraColor" ]
         , column [ width fill, spacing 12, Font.color Color.grey ]
             [ paragraph [] [ preparedText "Wide-gamut colors (OKLCH, DCI-P3, Rec. 2020) for elm-ui" ]
             , paragraph [] [ preparedText "Browsers will display a similar color anyway, even if it's not supported by the display." ]
             , paragraph [] [ preparedText "Think of the calculated fallback color as the one that will be used by the outdated browsers." ]
             , paragraph [] [ text "This package heavily borrows from the ", newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://culorijs.org/", label = preparedText "culori" }, text " library." ]
             ]
-        , paragraph TextStyle.subheader2 [ text "More info" ]
+        , paragraph TextStyle.subheader2.attrs [ text "More info" ]
         , column [ width fill, spacing 12, Font.color Color.grey ]
             [ paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl", label = preparedText "OKLCH in CSS: why we moved from RGB and HSL (by Evil Martians)" } ]
             , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch.com", label = preparedText "OKLCH Color Picker & Converter (by Evil Martians)" } ]
             , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch-palette.vercel.app", label = preparedText "OKlch palette generator (by Pleisto)" } ]
             ]
-        , paragraph TextStyle.subheader2 [ text "Examples" ]
+        , paragraph TextStyle.subheader2.attrs [ text "Examples" ]
         , column [ width fill, spacing layout.grid.gutter ] <|
             (gridRow layout
                 [ gridColumn layout { widthSteps = 4 } [ Font.color Color.grey ] [ text "Elm code" ]
@@ -164,7 +164,7 @@ viewMobile layout =
                 ]
                 :: List.map (viewColor layout) [ color1, color2, color3, color4 ]
             )
-        , paragraph TextStyle.subheader [ text "Typography" ]
+        , paragraph TextStyle.subheader.attrs [ text "Typography" ]
         , paragraph [] [ text "Notice how the lines are wrapped:" ]
         , paragraph [ Font.color Color.grey ] [ preparedText sampleText ]
         ]
@@ -181,7 +181,7 @@ viewColor layout sample =
         [ gridColumn layout
             { widthSteps = 4 }
             [ Font.color Color.grey ]
-            [ paragraph TextStyle.code [ text <| toElmCode sample ] ]
+            [ paragraph TextStyle.code.attrs [ text <| toElmCode sample ] ]
         , gridBox layout
             { widthSteps = 1, heightSteps = 1 }
             [ ExtraColor.backgroundColor color ]
@@ -204,5 +204,5 @@ toElmUiColor { r, g, b, alpha } =
 
 renderInlineStyleForPreview : InlineStyle -> Element msg
 renderInlineStyleForPreview =
-    List.map (\( k, v ) -> paragraph TextStyle.code [ text <| k ++ ": " ++ v ++ ";" ])
+    List.map (\( k, v ) -> paragraph TextStyle.code.attrs [ text <| k ++ ": " ++ v ++ ";" ])
         >> column [ spacing 8 ]

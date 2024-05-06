@@ -59,7 +59,7 @@ update _ model =
 view : Shared.Model -> { toContentMsg : Msg -> contentMsg, content : View contentMsg, model : Model } -> View contentMsg
 view shared { content } =
     { title = content.title
-    , attributes = GridLayout1.bodyAttributes shared.layout ++ TextStyle.body ++ content.attributes
+    , attributes = GridLayout1.bodyAttributes shared.layout ++ TextStyle.body.attrs ++ content.attributes
     , element =
         let
             outerElementAttrs : List (Attribute msg)
