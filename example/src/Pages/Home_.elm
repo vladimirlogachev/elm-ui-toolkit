@@ -101,7 +101,7 @@ color4 =
 
 pageTitle : String
 pageTitle =
-    "elm-ui toolkit"
+    "elm-ui-toolkit"
 
 
 sampleText : String
@@ -127,7 +127,7 @@ fact they were enemies."""
 
 view : Shared.Model -> View msg
 view { layout } =
-    { title = "elm-ui-toolkit"
+    { title = pageTitle
     , attributes = [ Background.color Color.black, Font.color Color.white ]
     , element =
         viewMobile layout
@@ -140,21 +140,21 @@ viewMobile layout =
         [ width fill
         , spacing layout.grid.gutter
         ]
-        [ paragraph TextStyle.header.attrs [ text pageTitle ]
-        , paragraph TextStyle.subheader.attrs [ text "ExtraColor" ]
+        [ paragraph TextStyle.headline.attrs [ text pageTitle ]
+        , paragraph TextStyle.header.attrs [ text "ExtraColor" ]
         , column [ width fill, spacing 12, Font.color Color.grey ]
             [ paragraph [] [ preparedText "Wide-gamut colors (OKLCH, DCI-P3, Rec. 2020) for elm-ui" ]
             , paragraph [] [ preparedText "Browsers will display a similar color anyway, even if it's not supported by the display." ]
             , paragraph [] [ preparedText "Think of the calculated fallback color as the one that will be used by the outdated browsers." ]
             , paragraph [] [ text "This package heavily borrows from the ", newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://culorijs.org/", label = preparedText "culori" }, text " library." ]
             ]
-        , paragraph TextStyle.subheader2.attrs [ text "More info" ]
+        , paragraph TextStyle.header2.attrs [ text "More info" ]
         , column [ width fill, spacing 12, Font.color Color.grey ]
             [ paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl", label = preparedText "OKLCH in CSS: why we moved from RGB and HSL (by Evil Martians)" } ]
             , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch.com", label = preparedText "OKLCH Color Picker & Converter (by Evil Martians)" } ]
             , paragraph [] [ newTabLink [ ExtraColor.fontColor Color.blue ] { url = "https://oklch-palette.vercel.app", label = preparedText "OKlch palette generator (by Pleisto)" } ]
             ]
-        , paragraph TextStyle.subheader2.attrs [ text "Examples" ]
+        , paragraph TextStyle.header2.attrs [ text "Examples" ]
         , column [ width fill, spacing layout.grid.gutter ] <|
             (gridRow layout
                 [ gridColumn layout { widthSteps = 4 } [ Font.color Color.grey ] [ text "Elm code" ]
@@ -164,7 +164,7 @@ viewMobile layout =
                 ]
                 :: List.map (viewColor layout) [ color1, color2, color3, color4 ]
             )
-        , paragraph TextStyle.subheader.attrs [ text "Typography" ]
+        , paragraph TextStyle.header.attrs [ text "Typography" ]
         , paragraph [] [ text "Notice how the lines are wrapped:" ]
         , paragraph [ Font.color Color.grey ] [ preparedText sampleText ]
         ]
