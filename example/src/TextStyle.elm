@@ -61,5 +61,5 @@ code =
         , fontSizePx = 16
         , lineHeightPx = 16
         , letterSpacingPercent = 0
-        , region = Just Region.mainContent
+        , region = Nothing
         }
