@@ -3,7 +3,7 @@
     "name": "vladimirlogachev/elm-ui-toolkit",
     "summary": "Wide-gamut colors (OKLCH, DCI-P3, Rec. 2020), typography, inline styles.",
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "exposed-modules": [
         "ExtraColor",
         "Typography",
