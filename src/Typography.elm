@@ -172,6 +172,10 @@ when the text style is used not on a paragraph, but on a column or row.
 So, a good practice would be to calculate the `paragraphSpacing` from Figma values,
 but use it carefully and only in paragraphs.
 
+As for `region` we assume that setting it for text styles like "headline" and "headers" is reasonable
+because `h1`, `h2` and other header regions are easy to guess from the font size,
+while for "body" or "lead" it better be unset here and set from the client code ad hoc.
+
 -}
 type alias TextStyle msg =
     { attrs : List (Attribute msg)
@@ -187,6 +191,7 @@ textStyleFromFigma :
     , fontSizePx : Int
     , lineHeightPx : Int
     , letterSpacingPercent : Float
+    , region : Maybe (Attribute msg)
     }
     -> TextStyle msg
 textStyleFromFigma props =
@@ -196,6 +201,13 @@ textStyleFromFigma props =
         , Font.size props.fontSizePx
         , Font.letterSpacing (toFloat props.fontSizePx * (props.letterSpacingPercent / 100))
         ]
+            ++ (case props.region of
+                    Just x ->
+                        [ x ]
+
+                    Nothing ->
+                        []
+               )
     , paragraphSpacing = spacing <| props.lineHeightPx - props.fontSizePx
     }
 
